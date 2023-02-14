@@ -6,7 +6,7 @@
     </div>
     <div class="form afterSubmit" v-show="Submited">
       <div v-html="afterSubmit"></div>
-      <a href="/SonG" @click="clearForm">提交另一份表單</a>
+      <a href="/forms/SonG" @click="clearForm">提交另一份表單</a>
     </div>
     <form
       class="form"
@@ -399,7 +399,7 @@ export default {
   label {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     justify-content: left;
     width: 100%;
     max-width: 500px;
