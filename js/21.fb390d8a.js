@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkforms"]=self["webpackChunkforms"]||[]).push([[21],{9021:function(n,r,e){e.r(r),e.d(r,{default:function(){return h}});var t=e(3396);const u=(0,t._)("head",null,[(0,t._)("meta",{"http-equiv":"refresh",content:"0; url=/forms/SonG"})],-1),l=(0,t._)("body",null,null,-1),o=[u,l];function s(n,r,e,u,l,s){return(0,t.wg)(),(0,t.iD)("html",null,o)}var f={},c=e(89);const a=(0,c.Z)(f,[["render",s]]);var h=a}}]);
+//# sourceMappingURL=21.fb390d8a.js.map
