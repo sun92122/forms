@@ -1,10 +1,10 @@
 // you can see more info at https://github.com/tschaub/gh-pages
-import { resolve } from "path";
-import { publish } from "gh-pages";
+const path = require("path");
+const ghpages = require("gh-pages");
 
 const options = {
   branch: "gh-pages",
-  repo: "https://github.com/sun92122/forms_src.git", // project github repo
+  repo: "https://github.com/sun92122/forms.git", // project github repo
 };
 
 const callback = (err) => {
@@ -15,4 +15,4 @@ const callback = (err) => {
 /**
  * This task pushes to the `master` branch of the configured `repo`.
  */
-publish(resolve(__dirname, "../dist"), options, callback);
+ghpages.publish(path.resolve(__dirname, "../dist"), options, callback);

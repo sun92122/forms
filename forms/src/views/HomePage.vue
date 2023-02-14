@@ -1,7 +1,7 @@
 <template>
   <html>
     <head>
-      <meta http-equiv="refresh" content="0; url=/SonG" />
+      <meta http-equiv="refresh" content="0; url=/forms/SonG" />
     </head>
     <body></body>
   </html>
