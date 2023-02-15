@@ -236,7 +236,7 @@ export default {
           this.Childs[i].childBirth.value +
           "）\n";
       }
-      return allChilds ? allChilds : "無";
+      return allChilds ? allChilds.trim() : "無";
     },
   },
   methods: {
