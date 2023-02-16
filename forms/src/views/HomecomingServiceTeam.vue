@@ -74,7 +74,7 @@
           v-bind="data.other"
           v-model="data.value"
           required
-          @change="autoGet(data.value)"
+          @input="autoGet(data.value)"
         />
         <input
           type="hidden"
@@ -280,6 +280,53 @@ export default {
         },
       },
       AfterSubmit: "", // TODO: Add your after submit message
+      AutoGetDatas: [
+        ["黃冠霖", "固拉多多綠", "總籌股", "股長"],
+        ["薛皓陽", "奶蓋歐卡", "總籌股", "股長"],
+        ["何躍陽", "証列空座", "總籌股", "股長"],
+        ["王俞樂", "派比比", "活動股", "股長"],
+        ["胡佳君", "卡卡派", "活動股", "股長"],
+        ["葉子榕", "派特", "活動股", "股長"],
+        ["楊士寬", "十八拉", "美輔股", "股長"],
+        ["陳美雯", "沙拉", "美輔股", "股長"],
+        ["連奕群", "紅燒獅子頭", "課程股", "股長"],
+        ["謝昀軒", "", "課程股", "股長"],
+        ["蔡明展", "蘿博糕", "生器股", "股長"],
+        ["李承恩", "大力士", "生器股", "股長"],
+        ["趙至媛", "檸檬派", "活動股", "股員"],
+        ["郭佩宜", "揪派", "活動股", "股員"],
+        ["黃裕實", "派派隊長", "活動股", "股員"],
+        ["呂卉然", "派毛毛", "活動股", "股員"],
+        ["劉子玄", "派Apple", "活動股", "股員"],
+        ["陳士祈", "奶油超派", "活動股", "股員"],
+        ["沈立寬", "Give me 派", "活動股", "股員"],
+        ["林書辰", "辰派", "活動股", "股員"],
+        ["王晴", "海派甜心", "活動股", "股員"],
+        ["鄧謹祈", "蛋黃派", "活動股", "股員"],
+        ["洪鈺晴", "蛋餅皮", "美輔股", "股員"],
+        ["林品辰", "雙眼皮", "美輔股", "股員"],
+        ["黃馨平", "蘋果皮", "美輔股", "股員"],
+        ["陳昱伶", "香蕉皮", "美輔股", "股員"],
+        ["黃品元", "水餃皮", "美輔股", "股員"],
+        ["林巧翎", "揪皮", "美輔股", "股員"],
+        ["廖昱華", "耍賴皮", "美輔股", "股員"],
+        ["李宇宸", "GD皮", "美輔股", "股員"],
+        ["張禎晏", "厚臉皮", "美輔股", "股員"],
+        ["馮貫恩", "單眼皮", "美輔股", "股員"],
+        ["賴彥安", "海蜇皮", "美輔股", "股員"],
+        ["陶君勤", "鼬鼬班班導", "課程股", "股員"],
+        ["姚思辰", "鼬香綠茶", "課程股", "股員"],
+        ["梁芝穎", "鼬子醬", "課程股", "股員"],
+        ["謝乙宇", "鼬柿泥", "課程股", "股員"],
+        ["黃敬倫", "鼬鼬man", "課程股", "股員"],
+        ["蘇振誌", "鼬鼬點點名", "課程股", "股員"],
+        ["周欣葶", "陌生人", "生器股", "股員"],
+        ["白于芳", "生煎包", "生器股", "股員"],
+        ["黃昱昇", "生笠軍", "生器股", "股員"],
+        ["江名傑", "生懶腰", "生器股", "股員"],
+        ["吳閎源", "模範生", "生器股", "股員"],
+        ["柯潔蓉", "值日生", "生器股", "股員"],
+      ],
     };
   },
   methods: {
@@ -293,15 +340,29 @@ export default {
       }
     },
     autoGet(name) {
-      axios.get(AppScriptUrl + "?mode=record&name=" + name).then((res) => {
-        const tempDatas = res.data;
-        console.log(res.data);
-        if (tempDatas == []) return;
-        this.BeforeDatas.姓名.value = tempDatas[0];
-        this.BeforeDatas.包裝名.value = tempDatas[1];
-        this.BeforeDatas2.股別.value = tempDatas[2];
-        this.BeforeDatas2.股長or股員.value = tempDatas[3];
-      });
+      for (var autoGetData in this.AutoGetDatas) {
+        if (name == "") return;
+        if (
+          this.AutoGetDatas[autoGetData][0] == name ||
+          this.AutoGetDatas[autoGetData][1] == name
+        ) {
+          this.BeforeDatas.姓名.value = this.AutoGetDatas[autoGetData][0];
+          this.BeforeDatas.包裝名.value = this.AutoGetDatas[autoGetData][1];
+          this.BeforeDatas2.股別.value = this.AutoGetDatas[autoGetData][2];
+          this.BeforeDatas2.股長or股員.value =
+            this.AutoGetDatas[autoGetData][3];
+          return;
+        }
+      }
+      // axios.get(AppScriptUrl + "?mode=record&name=" + name).then((res) => {
+      //   const tempDatas = res.data;
+      //   console.log(res.data);
+      //   if (tempDatas == []) return;
+      //   this.BeforeDatas.姓名.value = tempDatas[0];
+      //   this.BeforeDatas.包裝名.value = tempDatas[1];
+      //   this.BeforeDatas2.股別.value = tempDatas[2];
+      //   this.BeforeDatas2.股長or股員.value = tempDatas[3];
+      // });
     },
   },
   created() {
@@ -342,6 +403,18 @@ export default {
     attachment: fixed;
   }
   min-height: 100vh;
+
+  @media screen and (max-width: 550px) {
+    padding: 1rem;
+  }
+
+  @media screen and (max-width: 373px) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 353px) {
+    font-size: calc(14px - 2vw);
+  }
 }
 
 .title {
@@ -360,7 +433,8 @@ export default {
   background: rgba(255, 255, 255, 0.75);
 
   @media screen and (max-width: 550px) {
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
   }
 
   h1 {
@@ -399,18 +473,22 @@ export default {
   background: rgba(255, 255, 255, 0.75);
 
   @media screen and (max-width: 550px) {
-    width: calc(100% - 2rem);
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
   }
 
   .req {
     display: inline-block;
     text-align: center;
-    margin: 0 0.5rem;
+    margin: 1.5px 4px;
     color: #f00;
   }
 
   .container {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -438,6 +516,8 @@ export default {
 
   @media screen and (max-width: 550px) {
     margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 95%;
   }
 
   label {
@@ -481,6 +561,8 @@ export default {
 
   @media screen and (max-width: 550px) {
     margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 95%;
   }
 
   label {
@@ -492,17 +574,9 @@ export default {
     max-width: 500px;
 
     div {
+      display: flex;
       flex-direction: row;
       text-align: left;
-    }
-
-    .example {
-      display: flex;
-      font-size: smaller;
-      margin: 0 0.5rem;
-      color: #666;
-      text-justify: top;
-      font-style: italic;
     }
   }
 
@@ -539,13 +613,18 @@ export default {
     align-items: center;
 
     @media screen and (max-width: 550px) {
-      width: 120%;
+      width: 110%;
       font-size: smaller;
     }
 
     @media screen and (max-width: 400px) {
-      width: 130%;
+      width: 110%;
       font-size: smaller;
+    }
+
+    @media screen and (max-width: 350px) {
+      width: 110%;
+      font-size: xx-small;
     }
 
     .option {
