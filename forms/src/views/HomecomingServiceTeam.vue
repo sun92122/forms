@@ -131,7 +131,7 @@
       <div class="question Datas" v-if="Object.keys(Datas).length == 0">
         <h3>載入中...滿滿的問題馬上就來</h3>
       </div>
-      <div v-if="BeforeDatas.包裝名.value != 'test'">
+      <div class="container" v-if="BeforeDatas.包裝名.value != 'test'">
         <div class="question Datas" v-for="(data, key) in Datas" :key="key">
           <label :for="key">
             <div>
@@ -407,6 +407,10 @@ export default {
     text-align: center;
     margin: 0 0.5rem;
     color: #f00;
+  }
+
+  .container {
+    width: 100%;
   }
 }
 
