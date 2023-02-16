@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import SonG from "../views/SonG.vue";
+import HomecomingServiceTeam from "../views/HomecomingServiceTeam.vue";
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     // component: () =>
     //   import(/* webpackChunkName: "about" */ "../views/SonG.vue"),
+  },
+  {
+    path: "/HomecomingServiceTeam",
+    name: "HomecomingServiceTeam",
+    component: HomecomingServiceTeam,
+    meta: { title: "返服意見調查" },
   },
 ];
 

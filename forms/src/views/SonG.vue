@@ -116,11 +116,11 @@ export default {
         title: "雅歌G小組成員資料",
         subtitle:
           "親愛的弟兄姊妹們大家好" +
-          "<br \\>" +
+          "<br />" +
           "以下表單是個人資料調查表請大家填寫，裡面各項資訊請盡量填寫" +
-          "<br \\>" +
+          "<br />" +
           "所有資料僅供小組長及小家長們參考，絕不外流，謝謝大家" +
-          "<br \\>",
+          "<br />",
       },
       test: [],
       PostUrl: AppScriptUrl,
@@ -294,13 +294,13 @@ export default {
         console.log(tempdata[0], tempdata[1]);
         if (tempdata[0] == "標題") this.Title.title = tempdata[1];
         else if (tempdata[0] == "副標題")
-          this.Title.subtitle = tempdata[1].replace(/\r?\n/g, "<br \\>");
+          this.Title.subtitle = tempdata[1].replace(/\r?\n/g, "<br />");
         else if (tempdata[0] == "傳送後訊息")
-          this.afterSubmit = tempdata[1].replace(/\r?\n/g, "<br \\>");
+          this.afterSubmit = tempdata[1].replace(/\r?\n/g, "<br />");
         else
           this.Datas[tempdata[0]].example = tempdata[1].replace(
             /\r?\n/g,
-            "<br \\>"
+            "<br />"
           );
       }
     });
