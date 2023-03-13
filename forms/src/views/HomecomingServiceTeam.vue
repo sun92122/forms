@@ -5,6 +5,9 @@
       <img :src="Title.image" v-show="!Submited" />
       <div v-show="!Submited">
         <div v-for="item in Title.subtitle" :key="item" v-html="item"></div>
+        <div class="shortcut" @click="Submited = true">
+          只是來找傳送門可以點我
+        </div>
       </div>
     </div>
     <div class="form AfterSubmit" v-show="Submited">
@@ -13,7 +16,16 @@
         <div>各種傳送門</div>
         <div>
           <a
+            href="https://drive.google.com/drive/folders/13AVD27-bc5cBB0gJWY0Y0sq6wuqFgRnn?fbclid=IwAR1tQ6pIdpPpXhxPaSuRx0RyknBi7eaXf7VSJwOzIDzBq-F0LSt8qIOpAP0"
+            target="_blank"
+          >
+            重要的作業
+          </a>
+        </div>
+        <div>
+          <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSfjUcHtNB83e4kIF8mjT_xIZnN9aoWoJpdIfqXtWtraCLOYAQ/viewform?usp=sf_link"
+            target="_blank"
           >
             27返服股長意願
           </a>
@@ -21,6 +33,7 @@
         <div>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc6jOqFRvdzMO4bUT7dce6Zm2vYKz1cN2Rb-g8PltdG3yoNYw/viewform?usp=sf_link"
+            target="_blank"
           >
             27竹苗幹部意願
           </a>
@@ -28,6 +41,7 @@
         <div>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc1NMSYH7AnI7hYRqalPfgbEtknX8ZnwIa1uxKCMytgX_dCTw/viewform?usp=sf_link"
+            target="_blank"
           >
             27竹苗會長改選意願
           </a>
@@ -35,6 +49,7 @@
         <div>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSf0zeiFpduhwTK-57TpcMP6lkl4FlqDNQ0N8GOxg6Z0SCLhqg/viewform?usp=sf_link"
+            target="_blank"
           >
             竹苗週招工登記表
           </a>
@@ -75,6 +90,7 @@
           v-model="data.value"
           required
           @input="autoGet(data.value)"
+          @keydown.prevent.enter
         />
         <input
           type="hidden"
@@ -199,7 +215,7 @@
         </div>
       </div>
       <div class="submit">
-        <input type="submit" value="送出" />
+        <input type="submit" value="送出" @click.capture="checkForm" />
       </div>
     </form>
     <iframe v-show="false" name="nothing"></iframe>
@@ -243,6 +259,7 @@ export default {
           other: {
             type: "text",
             placeholder: "請輸入姓名",
+            autoComplete: "name",
           },
         },
         包裝名: {
@@ -290,7 +307,7 @@ export default {
         ["楊士寬", "十八拉", "美輔股", "股長"],
         ["陳美雯", "沙拉", "美輔股", "股長"],
         ["連奕群", "紅燒獅子頭", "課程股", "股長"],
-        ["謝昀軒", "", "課程股", "股長"],
+        ["謝昀軒", "？", "課程股", "股長"],
         ["蔡明展", "蘿博糕", "生器股", "股長"],
         ["李承恩", "大力士", "生器股", "股長"],
         ["趙至媛", "檸檬派", "活動股", "股員"],
@@ -330,6 +347,23 @@ export default {
     };
   },
   methods: {
+    checkForm() {
+      this.$nextTick(() => {
+        // let inputs = document.getElementsByTagName("input");
+        let isError = document.querySelectorAll(":invalid");
+        if (isError.length == 0) {
+          this.$refs.form.submit();
+          return;
+        }
+        isError[1].scrollIntoView({
+          // 滚动到指定节点
+          // 值有start,center,end，nearest，当前显示在视图区域中间
+          block: "center",
+          // 值有auto、instant,smooth，缓动动画（当前是慢速的）
+          behavior: "smooth",
+        });
+      });
+    },
     clearForm() {
       var key = undefined;
       for (key in this.BeforeDatas) this.BeforeDatas[key].value = "";
@@ -402,10 +436,11 @@ export default {
     position: center;
     attachment: fixed;
   }
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem);
 
   @media screen and (max-width: 550px) {
     padding: 1rem;
+    min-height: calc(100vh - 2rem);
   }
 
   @media screen and (max-width: 373px) {
@@ -455,6 +490,17 @@ export default {
     margin: 0.1rem 0;
     text-align: left;
     line-height: 1.5;
+  }
+
+  .shortcut {
+    text : {
+      align: right;
+      decoration: underline;
+    }
+    font: {
+      size: 12px;
+      weight: 400;
+    }
   }
 }
 
@@ -699,6 +745,7 @@ export default {
 
   div {
     margin: 0.5rem;
+    line-height: 2;
   }
 
   a {
